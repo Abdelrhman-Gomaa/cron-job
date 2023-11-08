@@ -1,11 +1,12 @@
 import { Knex } from "knex";
 
 export async function up(knex: Knex): Promise<void> {
-	if (!await knex.schema.hasTable('jobs'))
+	if (!await knex.schema.hasTable('deletedLogs'))
 		return knex.schema
-			.createTable('jobs', table => {
+			.createTable('deletedLogs', table => {
 				table.increments('id').primary();
-				table.boolean('isActive').notNullable();
+				table.string('log').notNullable();
+				table.string('deletedAt').notNullable();
 				table.timestamps(true, true);
 			});
 }

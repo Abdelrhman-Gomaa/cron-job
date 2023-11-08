@@ -1,12 +1,13 @@
 import { Model } from 'objection';
 
-export class Job extends Model {
+export class DeletedLog extends Model {
   static get tableName(): string {
-    return 'jobs';
+    return 'deletedLogs';
   }
 
   id!: number;
-  isActive!: boolean;
+  log!: string;
+  deletedAt!: Date | number;
 
   static get idColumn() {
     return 'id';
@@ -15,11 +16,12 @@ export class Job extends Model {
   static get jsonSchema() {
     return {
       type: 'object',
-      required: ['isActive'],
+      required: ['log'],
 
       properties: {
         id: { type: 'integer' },
-        log: { type: 'boolean' },
+        log: { type: 'string', minLength: 1 },
+        deletedAt: { type: 'string' }
       }
     };
   }
