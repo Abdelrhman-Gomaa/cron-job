@@ -4,11 +4,15 @@ import { AppService } from './app.service';
 import { LogModule } from './log/log.module';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
+import { JobModule } from './job/job.module';
 import * as Joi from 'joi';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
     LogModule,
+    JobModule,
+    ScheduleModule.forRoot(),
     DatabaseModule,
     ConfigModule.forRoot({
       validationSchema: Joi.object({

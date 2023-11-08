@@ -1,15 +1,15 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { LogService } from './log.service';
-import { CreateLogDto } from './input/create-log.input';
-import { UpdateLogDto } from './input/update-log.dtout';
+import { CreateLogInput } from './input/create-log.input';
+import { UpdateLogInput } from './input/update-log.input';
 
 @Controller('log')
 export class LogController {
   constructor(private readonly logService: LogService) { }
 
   @Post()
-  create(@Body() createLogDto: CreateLogDto) {
-    return this.logService.create(createLogDto);
+  create() { //@Body() input: CreateLogInput
+    return this.logService.create();
   }
 
   @Get()
@@ -23,8 +23,8 @@ export class LogController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLogDto: UpdateLogDto) {
-    return this.logService.update(+id, updateLogDto);
+  update(@Param('id') id: string, @Body() input: UpdateLogInput) {
+    return this.logService.update(input);
   }
 
   @Delete(':id')
