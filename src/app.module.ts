@@ -7,6 +7,7 @@ import { DatabaseModule } from './database/database.module';
 import { JobModule } from './job/job.module';
 import * as Joi from 'joi';
 import { ScheduleModule } from '@nestjs/schedule';
+import { NestBullModule } from './_common/bull/bull.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     JobModule,
     ScheduleModule.forRoot(),
     DatabaseModule,
+    NestBullModule,
     ConfigModule.forRoot({
       validationSchema: Joi.object({
         NODE_ENV: Joi.string()
