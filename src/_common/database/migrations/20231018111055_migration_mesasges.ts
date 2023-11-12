@@ -5,10 +5,10 @@ export async function up(knex: Knex): Promise<void> {
 		return knex.schema
 			.createTable('messages', table => {
 				table.increments('id').primary();
-				table.boolean('isActive').notNullable();
 				table.string('to').notNullable();
 				table.string('from').notNullable();
 				table.string('content').notNullable();
+				table.enu('type', ['pending', 'success', 'cancelled']);
 				table.timestamps(true, true);
 			});
 }

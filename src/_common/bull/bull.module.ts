@@ -41,7 +41,7 @@ const queues = [
               return new IORedis(connectionOptions);
           }
         },
-        defaultJobOptions: { removeOnComplete: true, removeOnFail: true }
+        defaultJobOptions: { removeOnComplete: false, removeOnFail: false }
       })
     }),
     ...queues

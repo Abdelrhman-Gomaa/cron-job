@@ -1,18 +1,16 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { LogModule } from './log/log.module';
 import { ConfigModule } from '@nestjs/config';
-import { DatabaseModule } from './database/database.module';
-import { JobModule } from './job/job.module';
 import * as Joi from 'joi';
 import { ScheduleModule } from '@nestjs/schedule';
 import { NestBullModule } from './_common/bull/bull.module';
+import { SendMessageModule } from './send-message/send-message.module';
+import { DatabaseModule } from './_common/database/database.module';
 
 @Module({
   imports: [
-    LogModule,
-    JobModule,
+    SendMessageModule,
     ScheduleModule.forRoot(),
     DatabaseModule,
     NestBullModule,

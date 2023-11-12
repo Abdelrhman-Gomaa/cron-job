@@ -3,7 +3,7 @@ import { Job, Queue } from 'bull';
 import { SendMessageInput } from './input/send-message-input';
 
 @Processor('send-message')
-export class JobProcessor {
+export class SendMessageProcessor {
   constructor(
     @InjectQueue('send-message') private readonly msgQueue: Queue,
   ) { }
@@ -39,7 +39,6 @@ export class JobProcessor {
     };
     console.log('-------- send-messageJob process --------');
     try {
-      console.log('process', { input });
       jobCase.statusChanged = true;
     } catch (error) {
       console.log('Error -> ', error);

@@ -6,10 +6,10 @@ export class Message extends Model {
   }
 
   id!: number;
-  isActive!: boolean;
   to!: string;
   from!: string;
   content!: string;
+  type!: string
 
   static get idColumn() {
     return 'id';
@@ -22,10 +22,10 @@ export class Message extends Model {
 
       properties: {
         id: { type: 'integer' },
-        isActive: { type: 'boolean', default: true },
         to: { type: 'string' },
         from: { type: 'string' },
         content: { type: 'string' },
+        type: { type: 'string', enum: ['pending', 'success', 'cancelled'] , default: 'pending'},
       }
     };
   }
