@@ -1,6 +1,6 @@
 import { InjectQueue } from '@nestjs/bull';
 import { Injectable } from '@nestjs/common';
-import { Queue, Job } from 'bull';
+import { Queue } from 'bull';
 import { SendMessageInput } from './input/send-message-input';
 import { Message } from './models/message.model';
 
@@ -13,16 +13,18 @@ export class SendMessageService {
   ) { }
 
   async sendMessage(input: SendMessageInput) {
-    await Message.query().insert({
+    const message = await Message.query().insert({
       to: input.to,
       from: input.from,
       content: input.content
     });
-    const job = await this.msgQueue.add(
+    input.id = message.id;
+    await this.msgQueue.add(
       'send-messageJob',
       { ...input },
-      { delay: 10000000000000000 } //new Date().valueOf() - input.dateToRun }
+      { delay: input.dateToRun - new Date().valueOf() }
     );
+    return message;
   }
 
   async trackDelayedMessage() {
