@@ -31,7 +31,11 @@ export class SendMessageService {
     await this.trackMsgQueue.add(
       'track-messageJob',
       {},
-      { delay: 1000 }
+      {
+        repeat: {
+          every: 5 * 60 * 1000,
+        },
+      }
     );
     // const delayJobs = await this.msgQueue.getJobs(['delayed']);
     // console.log(delayJobs[0].data);
